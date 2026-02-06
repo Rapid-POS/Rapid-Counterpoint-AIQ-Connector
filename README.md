@@ -59,6 +59,10 @@ If the configured phone number field contains more than or fewer than 10 digits,
 
 ![AIQ Customer Record](./images/counterpoint-AIQ-customer-record.png)
 
+When an AIQ customer record is created or updated in Counterpoint, it is flagged for synchronization. The customer sync process runs once daily according to the configured **Daily Event Execution Time** (default 6:00 AM).
+
+After the data is received, the AIQ platform processes the update independently, and changes may take up to one day to become visible within AIQ, depending on AIQ processing timelines. 
+
 ### Accessing AIQ Customer Records
 
 All AIQ customer records can also be accessed from:
@@ -84,9 +88,17 @@ Each AIQ customer record includes a sync status value indicating its current sta
 
 ## SECTION 2: AIQ Item Records
 
-The AIQ Connector syncs item and inventory record data from Counterpoint to AIQ to support ticket data and product-specific marketing initiatives. 
+The AIQ Connector syncs item and inventory record data from Counterpoint to AIQ to support transactional data and product-specific marketing initiatives. 
 
 ![AIQ Item Record](./images/counterpoint-AIQ-item-record.png)
+
+Following ticket posting, AIQ item records are automatically created in Counterpoint for any items that do not yet have an associated AIQ item record. At the same time, any existing AIQ item records are flagged for synchronization.
+
+When an AIQ item record is created or updated in Counterpoint (or it is present on a recently posted ticket), it is flagged for synchronization. The item sync process runs once daily according to the configured **Item Sync Event Execution Time** (default 10:00 PM).
+
+After the data is received, the AIQ platform processes the update independently, and changes may take up to one day to become visible within AIQ, depending on AIQ processing timelines. 
+
+The quantity value sent to AIQ represents the quantity on hand. For clients with multiple inventory locations in Counterpoint, the CRM_AIQ location group determines which locations are included when calculating quantity on hand. Quantities from the included locations are summed and sent to AIQ, allowing specific inventory locations to be excluded from synchronization.
 
 ### Accessing AIQ Item Records
 
@@ -138,7 +150,7 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 Controls when AIQ customer records are automatically created in Counterpoint.
 
 - **EMAIL ONLY**  
-  A AIQ customer record is automatically created when a customer is added to Counterpoint with **Email Address 1**.  
+  An AIQ customer record is automatically created when a customer is added to Counterpoint with **Email Address 1**.  
   - If the configured phone number (**Mobile Phone 1** or **Phone 1**) is also present and valid, it will be included on the AIQ persona.
 
 - **NO**  
@@ -164,7 +176,7 @@ Defines which Counterpoint Customer Record phone number field is used to populat
 
 ### Documents Up Start Date
 - Used to limit the furthest historical date from which documents will sync.
-- Also enables syncing of previously posted (historical) tickets to AIQ during installation of the connector.
+- Also enables syncing of previously posted (historical) tickets to AIQ during initial connector setup.
 
 ### Documents Up Look Back Days
 - Each connector run checks for documents that have not yet synced, going back the specified number of days.
@@ -260,9 +272,9 @@ The following item and inventory fields are included in a standard AIQ connector
 
 ## SECTION 7: AIQ Field Mapping Documents Up
 
-The **AIQ Field Mapping Documents Up** screen provides a user interface for managing which document (ticket) fields are sent from Counterpoint up to AIQ.
+The **AIQ Field Mapping Documents Up** screen provides a user interface for managing which document (posted ticket) fields are sent from Counterpoint up to AIQ.
 
-This table defines how customer record data in Counterpoint maps to AIQ persona properties. The standard deployment includes a predefined set of fields that are automatically synced. Adjustments to this table should generally be performed by a programmer.
+This table defines how document data in Counterpoint maps to AIQ sale history fields. The standard deployment includes a predefined set of fields that are automatically synced. Adjustments to this table should generally be performed by a programmer.
 
 Note: This is best viewed in _table view_.
 
@@ -274,7 +286,7 @@ Calculated fields are not included by default. Any request to add calculated fie
 
 The following document fields are included in a standard AIQ connector deployment:
 
-#### Ticket Header Data
+#### Ticket History Header Data
 1. Document ID
 2. Store ID
 3. Business Date
@@ -282,7 +294,7 @@ The following document fields are included in a standard AIQ connector deploymen
 5. Discount Amount
 6. Total
 
-#### Ticket Line Data
+#### Ticket History Line Data
 1. Item Numbers
 2. Descriptions
 3. Prices
@@ -291,6 +303,12 @@ The following document fields are included in a standard AIQ connector deploymen
 6. Vendor Numbers
 7. Weights
 8. Quantities Sold
+
+#### Document Sync Schedule
+
+Following ticket posting, AIQ item records are automatically added to a queue to be synced to AIQ. The document sync process runs once daily according to the configured **Daily Event Execution Time** (default 6:00 AM).
+
+After the data is received, the AIQ platform processes the sale independently, and changes may take up to one day to become visible within AIQ, depending on AIQ processing timelines. 
 
 ---
 
@@ -338,7 +356,7 @@ For details on the meaning of each item sync status value, refer back to **SECTI
 
 ## Section 10: AIQ Documents Queue
 
-When sending document data to AIQ, each ticket is first placed into a queue in Counterpoint. Tickets are then synced from this queue to AIQ during connector runs.
+When sending document data to AIQ, each posted ticket is first placed into a queue in Counterpoint. Tickets are then synced from this queue to AIQ on the next run of the connector.
 
 ![AIQ Document Queue](./images/AIQ-document-queue.png)
 
@@ -355,9 +373,17 @@ Each document in the queue includes a status value indicating its current state 
 
 ## Section 11: AIQ Items Quantity on Hand View
 
+The **AIQ Items Quantity on Hand View** displays the current summed **quantity on hand** for each item that has an AIQ item record in Counterpoint.
 
+![AIQ Items Quantity on Hand View](./images/AIQ-items-quantity-on-hand-view.png)
 
-## SECTION 10: Run AIQ Connector Button
+For clients with multiple inventory locations in Counterpoint, the **CRM_AIQ location group** determines which locations are included when calculating the **total** quantity on hand. Quantities from the included locations are aggregated and displayed in this view.
+
+In Counterpoint, **quantity on hand** is updated only when specific transactions are posted. These transactions include posting a ticket, posting a receiver, posting an inventory adjustment, posting a transfer out, and posting a physical count.
+
+---
+
+## SECTION 12: Run AIQ Connector Button
 
 The **Run AIQ Connector** menu option allows authorized users to manually trigger the AIQ Connector when needed. Manual execution is typically used for testing or troubleshooting and is not required during normal operation.
 
@@ -368,6 +394,7 @@ When the **Run AIQ Connector** menu option is selected:
 - A **Manual Run Connector** action flag is set in the AIQ configuration.
 - The flag functions as a **one-time execution request** and remains enabled until it is processed by the connector.
 - Execution is handled in the background on the server (not on the workstation) to prevent overlapping executions.
+- During a manual run, the configured **Daily Event Execution Time** and **Item Sync Event Execution Time** schedules are bypassed. Instead, customer changes, item changes, and posted tickets currently in the queue are synced immediately.
 
 ### Background Processing and Scheduling
 
@@ -384,7 +411,7 @@ In both scenarios, the action flag is **automatically cleared** when execution b
 
 ---
 
-## SECTION 11: Mark All AIQ Messages as Read
+## SECTION 13: Mark All AIQ Messages as Read
 
 The **Mark All AIQ Messages as Read** menu option allows users to suppress repeated pop-up alerts in Counterpoint while retaining all AIQ connector messages for later review.
 
@@ -396,11 +423,11 @@ Marking messages as read stops the pop-up notifications but does **not** delete 
 
 ---
 
-## SECTION 12: AIQ Connector Execution and Sync Timing
+## SECTION 14: AIQ Connector Execution and Sync Timing
 
-The AIQ Connector operates as a **Windows Service**, automatically syncing customer profiles and transactional documents between Counterpoint and AIQ.
+The AIQ Connector operates as a **Windows Service**, automatically syncing customer personas, items and inventory changes, and transactional documents between Counterpoint and AIQ.
 
-The connector runs continuously in the background and is responsible for keeping both systems aligned while respecting AIQ API rate limits and configured sync rules.
+The connector runs in the background and is responsible for keeping both systems aligned while respecting AIQ API rate limits and configured sync rules.
 
 ### Sync Intervals
 
@@ -419,33 +446,7 @@ For details on how customer profile changes are evaluated and synchronized betwe
 
 ---
 
-## SECTION 13: Customer Profile Sync Logic and Workflow
-
-This section describes the logical order and decision-making process used by the connector after a sync cycle begins.
-
-The AIQ Connector processes customer profile updates in a defined sequence to ensure that the most recent and authoritative data is preserved between Counterpoint and AIQ.
-
-### Step 1: Sync Changes from AIQ Down to Counterpoint
-
-The connector first retrieves profile changes made in AIQ and evaluates whether those changes should be applied to Counterpoint.
-
-- The connector compares the **date and time** of the most recent profile change in AIQ to the **date and time** of the most recent update in Counterpoint.
-- The system uses the values from the source with the **most recent timestamp**.
-
-Behavior depends on configuration settings:
-
-- If **Insert/Update Customers** is **enabled**, all configured fields are synced down from AIQ to Counterpoint.
-- If **Insert/Update Customers** is **disabled**, only **subscription status changes** are synced down.
-
-### Step 2: Sync Changes from Counterpoint Up to AIQ
-
-After processing inbound changes, the connector identifies customer records in Counterpoint that have been **created or modified** since the previous sync.
-
-These updates are then pushed up to AIQ, ensuring that AIQ profiles reflect the most current customer information stored in Counterpoint.
-
----
-
-## SECTION 14: Managing Customer Email and Phone Updates
+## SECTION 15: Managing Customer Email and Phone Updates
 
 When a customer is synced to AIQ, the connector stores the associated **AIQ Profile ID** on the customer record in Counterpoint. This Profile ID becomes the permanent link between the Counterpoint customer and the AIQ profile and is used for all future updates.  
 
@@ -453,7 +454,7 @@ Using the Profile ID ensures that customer history, engagement data, events, and
 
 ### Updating Email Address and Phone Number
 
-If **Email Address 1** or the configured phone number (**Mobile Phone 1** or **Phone 1**) is updated in Counterpoint for a customer who already has a AIQ profile:
+If **Email Address 1** or the configured phone number (**Mobile Phone 1** or **Phone 1**) is updated in Counterpoint for a customer who already has an AIQ profile:
 
 - The connector updates the email address or phone number on the **existing AIQ Profile ID**.
 - A new AIQ profile is **not** created.
@@ -477,9 +478,9 @@ If the connector is installed and **multiple Counterpoint customers already shar
 
 This behavior is expected and prevents duplicate AIQ profiles from being created during initial deployment.
 
-#### Scenario 2: A AIQ Customer Record Already Exists and the Same Email Is Assigned to Another Counterpoint Customer
+#### Scenario 2: An AIQ Customer Record Already Exists and the Same Email Is Assigned to Another Counterpoint Customer
 
-If a AIQ customer record already exists in Counterpoint for a given email address, and a user attempts to assign that **same Email Address 1** to a different Counterpoint customer record (either by editing an existing customer or creating a new one):
+If an AIQ customer record already exists in Counterpoint for a given email address, and a user attempts to assign that **same Email Address 1** to a different Counterpoint customer record (either by editing an existing customer or creating a new one):
 
 - Counterpoint blocks the action.
 - An error is returned to the user.
@@ -505,5 +506,3 @@ The Rapid AIQ Connector streamlines the exchange of customer profiles and transa
 Before go-live, review configuration settings, field mappings, and list configurations to ensure customer data and subscription preferences are handled correctly. After deployment, monitor customer and document sync status views to identify invalid data or records requiring remediation.
 
 For assistance with configuration changes, custom field mapping, event setup, or troubleshooting, contact Rapid Support.  
-
-  
