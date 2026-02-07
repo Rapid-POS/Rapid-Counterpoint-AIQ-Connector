@@ -21,7 +21,8 @@ It is important to note that this unification occurs **within AIQ only**. Custom
 
 As a result, customer data synced from Counterpoint may be transformed or consolidated by the AIQ platform to improve segmentation, analytics, and marketing effectiveness.
  
-Please visit [https://support.alpineiq.com/persona-merging](https://support.alpineiq.com/persona-merging) for more information.
+For more information, see:
+[https://support.alpineiq.com/persona-merging](https://support.alpineiq.com/persona-merging)
 
 ---
 
@@ -177,7 +178,7 @@ Controls when AIQ customer records are automatically created in Counterpoint.
 
 - **EMAIL ONLY**  
   An AIQ customer record is automatically created when a customer is added to Counterpoint with **Email Address 1**.  
-  - If the configured phone number (**Mobile Phone 1** or **Phone 1**) is also present and valid, it will be included on the AIQ persona.
+  - If the configured phone number (**Mobile Phone 1** or **Phone 1**) is also present and valid, it will be included on the AIQ Persona.
 
 - **NO**  
   AIQ customer records must be created manually.
@@ -218,7 +219,7 @@ Defines which Counterpoint Customer Record phone number field is used to populat
 - For example:
   - If the batch size is 100 and the maximum allowed is 500, the connector will process up to five batches.
   - If fewer than 100 documents remain before reaching the maximum, the final batch will be reduced accordingly.
-- Works in conjuction with **Documents Up Queue Batch Size**
+- Works in conjunction with **Documents Up Queue Batch Size**
   - During each connector execution, the connector tracks how many documents have already been synced in the current run.
   - Before processing each batch, it evaluates how many documents remain before reaching the maximum allowed.
   - The batch size is dynamically reduced if needed so the connector never exceeds the configured maximum.
@@ -257,7 +258,7 @@ This allows precise control over which store locations contribute transactional 
 
 The **AIQ Field Mapping Customers Up** screen provides a user interface for managing which customer fields are sent from Counterpoint up to AIQ.
 
-This table defines how customer record data in Counterpoint maps to AIQ persona properties. The standard deployment includes a predefined set of fields that are automatically synced. Adjustments to this table should generally be performed by a programmer.
+This table defines how customer record data in Counterpoint maps to AIQ Persona properties. The standard deployment includes a predefined set of fields that are automatically synced. Adjustments to this table should generally be performed by a programmer.
 
 Note: This is best viewed in _table view_.
 
@@ -523,7 +524,7 @@ This consolidation occurs entirely within AIQ.
 
 When two customer records are merged in Counterpoint:
 
-- The AIQ customer record associated with the **“To”** customer (the retained record) remains linked to the AIQ persona.
+- The AIQ customer record associated with the **“To”** customer (the retained record) remains linked to the AIQ Persona.
 - If the **“From”** customer had an associated AIQ customer record, that record becomes detached from any active customer.
 - The connector notifies AIQ of the merge using the `createUpdateSale` endpoint, after which AIQ processes the persona data according to its own logic.
 
