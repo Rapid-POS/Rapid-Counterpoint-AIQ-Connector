@@ -380,7 +380,7 @@ The **AIQ Customer Status View** displays a summary table showing:
 - The table can be refreshed at any time to display the most up-to-date information.
 - This is best viewed in _table view_.
 
-![AIQ Customer Status View](./images/AIQ-customer-status-view.png)
+![AIQ Customer Status View](./images/counterpoint-AIQ-customer-status-view.png)
 
 For details on the meaning of each customer sync status value, refer back to **SECTION 1: AIQ Customer Records**.
 
@@ -401,7 +401,7 @@ The **AIQ Item Status View** displays a summary table showing:
 - The table can be refreshed at any time to display the most up-to-date information.
 - This is best viewed in _table view_.
 
-![AIQ Item Status View](./images/AIQ-item-status-view.png)
+![AIQ Item Status View](./images/counterpoint-AIQ-item-status-view.png)
 
 For details on the meaning of each item sync status value, refer back to **SECTION 2: AIQ Item Records**.
 
@@ -411,7 +411,7 @@ For details on the meaning of each item sync status value, refer back to **SECTI
 
 When sending document data to AIQ, each posted ticket is first placed into a queue in Counterpoint. Tickets are then synced from this queue to AIQ on the next run of the connector.
 
-![AIQ Document Queue](./images/AIQ-document-queue.png)
+![AIQ Document Queue](./images/counterpoint-AIQ-document-queue.png)
 
 ### Queue Status Values
 
@@ -428,7 +428,7 @@ Each document in the queue includes a status value indicating its current state 
 
 The **AIQ Items Quantity on Hand View** displays the current summed **quantity on hand** for each item that has an AIQ item record in Counterpoint.
 
-![AIQ Items Quantity on Hand View](./images/AIQ-items-quantity-on-hand-view.png)
+![AIQ Items Quantity on Hand View](./images/counterpoint-AIQ-items-quantity-on-hand-view.png)
 
 For clients with multiple inventory locations in Counterpoint, the **CRM_AIQ location group** determines which locations are included when calculating the **total** quantity on hand. Quantities from the included locations are aggregated and displayed in this view.
 
