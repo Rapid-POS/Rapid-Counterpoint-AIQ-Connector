@@ -381,7 +381,7 @@ The **AIQ Customer Status View** displays a summary table showing:
 - The table can be refreshed at any time to display the most up-to-date information.
 - This is best viewed in _table view_.
 
-![AIQ Customer Status View](./images/counterpoint-AIQ-customer-status-view-table-view.png)
+![AIQ Customers Status View](./images/counterpoint-AIQ-customers-status-view-table-view.png)
 
 For details on the meaning of each customer sync status value, refer back to **SECTION 1: AIQ Customer Records**.
 
@@ -402,7 +402,7 @@ The **AIQ Item Status View** displays a summary table showing:
 - The table can be refreshed at any time to display the most up-to-date information.
 - This is best viewed in _table view_.
 
-![AIQ Item Status View](./images/counterpoint-AIQ-item-status-view.png)
+![AIQ Items Status View](./images/counterpoint-AIQ-items-status-view-table-view.png)
 
 For details on the meaning of each item sync status value, refer back to **SECTION 2: AIQ Item Records**.
 
@@ -412,7 +412,7 @@ For details on the meaning of each item sync status value, refer back to **SECTI
 
 When sending document data to AIQ, each posted ticket is first placed into a queue in Counterpoint. Tickets are then synced from this queue to AIQ on the next run of the connector.
 
-![AIQ Document Queue](./images/counterpoint-AIQ-document-queue.png)
+![AIQ Documents Queue](./images/counterpoint-AIQ-documents-queue-table-view.png)
 
 ### Queue Status Values
 
