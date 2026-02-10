@@ -87,7 +87,7 @@ All AIQ customer records can also be accessed from:
 
 This view allows records to be displayed in **table view**, where filters can be applied to review customers based on their current sync status.
 
-![AIQ Customers in Table View](./images/counterpoint-AIQ-customers-table-view.png)
+![AIQ Customers in Table View](./images/counterpoint-AIQ-customer-records-table-view.png)
 
 ### AIQ Sync Status Codes
 
@@ -429,7 +429,7 @@ Each document in the queue includes a status value indicating its current state 
 
 The **AIQ Items Quantity on Hand View** displays the current summed **quantity on hand** for each item that has an AIQ item record in Counterpoint.
 
-![AIQ Items Quantity on Hand View](./images/counterpoint-AIQ-items-quantity-on-hand-view.png)
+![AIQ Items Quantity on Hand View](./images/counterpoint-AIQ-items-quantity-on-hand-view-table-view.png)
 
 For clients with multiple inventory locations in Counterpoint, the **CRM_AIQ location group** determines which locations are included when calculating the **total** quantity on hand. Quantities from the included locations are aggregated and displayed in this view.
 
