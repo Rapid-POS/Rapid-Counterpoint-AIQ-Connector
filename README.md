@@ -381,7 +381,7 @@ The **AIQ Customer Status View** displays a summary table showing:
 - The table can be refreshed at any time to display the most up-to-date information.
 - This is best viewed in _table view_.
 
-![AIQ Customer Status View](./images/counterpoint-AIQ-customer-status-view.png)
+![AIQ Customer Status View](./images/counterpoint-AIQ-customer-status-view-table-view.png)
 
 For details on the meaning of each customer sync status value, refer back to **SECTION 1: AIQ Customer Records**.
 
