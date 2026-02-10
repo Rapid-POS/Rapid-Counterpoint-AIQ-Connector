@@ -391,7 +391,7 @@ For details on the meaning of each customer sync status value, refer back to **S
 
 Each AIQ item record includes a **sync status** that indicates its current state in the connector process. In some cases, it is helpful to review how many item records fall into a particular status category.
 
-For example, you may want to identify that **43 items have encountered an error (status 9)** so those records can be reviewed and corrected.
+For example, you may want to identify that an item has encountered an error (status 9) so that record can be reviewed and remediated.
 
 The **AIQ Item Status View** displays a summary table showing:
 - Each sync status code (0, 1, 2, 9)
