@@ -7,7 +7,7 @@ Updated 2/6/2026
 
 The Rapid AIQ Connector syncs customer and transactional data from Counterpoint to AIQ to support targeted email and SMS marketing. AIQ specializes in regulated industries, including firearms.
 
-The connector syncs customer information and sales activity for customers with a populated **Email Address 1** in Counterpoint. If configured, **Phone 1** or **Mobile Phone 1** can also be included to support AIQ SMS marketing.
+The connector syncs customer information and sales activity for customers with a populated **Email Address 1** in Counterpoint. If configured, **Phone 1** or **Mobile Phone 1** can also be included to support SMS marketing.
 
 ### AIQ Customer Unification
 
@@ -75,7 +75,7 @@ If the configured phone number field contains more than or fewer than 10 digits,
 
 ![AIQ Customer Record](./images/counterpoint-AIQ-customer-record.png)
 
-When an AIQ customer record is created or updated in Counterpoint, it is flagged for synchronization. The customer sync process runs once daily according to the configured **Daily Event Execution Time** (default 6:00 AM).
+When an AIQ customer record is created or updated in Counterpoint, it is flagged for synchronization. The customer sync process runs once daily according to the configured **Daily Event Execution Time** (default 10:00 PM).
 
 After the data is received, the AIQ platform processes the update independently, and changes may take up to one day to become visible within AIQ, depending on AIQ processing timelines. 
 
@@ -164,11 +164,10 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 - Displays the current connector version and the most recent maintenance information for reference.
 
 ### Workgroup
-- Workgroup **234** will be created and used when inserting new customer records from AIQ into Counterpoint.
-- The associated Customer Template for this workgroup is applied during customer creation.
+- Customer activity sometimes requires a defined workgroup. If needed, this connector will use workgroup **234**, which is created during the installation process.
 
 ### Message Group ID
-- Defines the Message Group ID ('MAIL_GRP_ID') used for AIQ connector alert messages in Counterpoint.
+- Defines the Message Group ID (`MAIL_GRP_ID`) used for AIQ connector alert messages in Counterpoint.
 - When an error or issue is encountered, alerts are sent to the Counterpoint users associated with this message group.
 - It is recommended to assign 1–3 users to receive these alerts.
 - Note: This value must reference a valid Message Group containing the appropriate Counterpoint User ID values.
@@ -176,18 +175,16 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 ### Auto Create AIQ Persona
 Controls when AIQ customer records are automatically created in Counterpoint.
 
-- **EMAIL ONLY**  
-  An AIQ customer record is automatically created when a customer is added to Counterpoint with **Email Address 1**.  
-  - If the configured phone number (**Mobile Phone 1** or **Phone 1**) is also present and valid, it will be included on the AIQ Persona.
+**EMAIL ONLY**  
+- An AIQ customer record is automatically created when a customer is added to Counterpoint with **Email Address 1**.  
+- If the configured phone number (**Mobile Phone 1** or **Phone 1**) is also present and valid, it will be included on the AIQ Persona.
 
-- **NO**  
-  AIQ customer records must be created manually.
+**NO**  
+- AIQ customer records must be created manually.
 
 ### Phone # for AIQ
-Defines which Counterpoint Customer Record phone number field is used to populate the AIQ **Phone Number** persona property.
-- Supported options:
-  - **Mobile Phone 1**
-  - **Phone 1**
+- Defines which Counterpoint Customer Record phone number field is used to populate the AIQ **Phone Number** persona property.
+- Supported options: **Mobile Phone 1** or **Phone 1**
 - If the selected phone field does not meet the _exactly 10 numeric digits_ requirement, the phone number will not be sent to AIQ
 
 ### Last Customer Sync Date (UTC)
