@@ -269,8 +269,8 @@ Calculated fields are not included by default. Any request to add calculated fie
 
 The following customer fields are included in a standard AIQ connector deployment:
 
-1. Email Address 1  
-2. Mobile Phone 1
+1. Email Address  
+2. Phone
 3. Customer Number
 4. First Name  
 5. Last Name  
