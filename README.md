@@ -1,5 +1,5 @@
 # Rapid POS AIQ Connector - Version 1.0
-Updated 2/6/2026
+Updated 2/16/2026
 
 ---
 
@@ -357,7 +357,7 @@ The following document fields are included in a standard AIQ connector deploymen
 
 #### Document Sync Schedule
 
-Following ticket posting, AIQ item records are automatically added to a queue to be synced to AIQ. The document sync process runs once daily according to the configured **Daily Event Execution Time** (default 6:00 AM).
+Following ticket posting, AIQ item records are automatically added to a queue to be synced to AIQ. The document sync process runs once daily according to the configured **Daily Event Execution Time** (default 10:00 PM).
 
 After the data is received, the AIQ platform processes the sale independently, and changes may take up to one day to become visible within AIQ, depending on AIQ processing timelines. 
 
@@ -483,7 +483,7 @@ The AIQ Connector operates as a **Windows Service**, automatically syncing custo
 The connector runs in the background and processes different types of data on **separate schedules**, following recommendations from the AIQ platform to optimize performance and API usage.
 
 ### Daily Event Execution Time
-The following data is synced **once per day** according to the configured **Daily Event Execution Time** (default **6:00 AM**):
+The following data is synced **once per day** according to the configured **Daily Event Execution Time** (default **10:00 PM**):
 - Customers
 - Posted tickets
 
@@ -531,8 +531,9 @@ It is recommended to **manually delete** the detached AIQ Customer record after 
 
 ## Conclusion
 
-The Rapid AIQ Connector streamlines the exchange of customer and transactional data between Counterpoint and AIQ, enabling powerful email and SMS marketing, accurate segmentation, and automated flows.
-
-Before go-live, review configuration settings and field mappings. After deployment, monitor customer and item sync status views to identify invalid records requiring remediation.
-
-For assistance with configuration changes, field mapping, or troubleshooting, contact Rapid Support.  
+The Rapid AIQ Connector streamlines the exchange of customer and transactional data between Counterpoint and AIQ, enabling powerful email and SMS marketing. 
+  
+Before go-live, review configuration settings and field mappings. After deployment, monitor customer, item and document sync statuses to identify invalid records requiring remediation. 
+  
+For assistance with configuration changes, field mapping, or troubleshooting, contact Rapid Support. 
+  
