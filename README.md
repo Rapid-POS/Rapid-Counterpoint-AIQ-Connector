@@ -489,7 +489,6 @@ The following data is synced **once per day** according to the configured **Dail
 
 ### Item Sync Event Execution Time
 Item and inventory data is synced **once per day** according to the configured **Item Sync Event Execution Time** (default **10:00 PM**):
-- Items and their quantities
 
 ---
 
