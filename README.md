@@ -1,5 +1,5 @@
 # Rapid POS AIQ Connector - Version 1.0
-Updated 2/16/2026
+Updated 2/19/2026
 
 ---
 
