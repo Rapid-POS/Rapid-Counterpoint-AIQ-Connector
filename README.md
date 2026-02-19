@@ -351,9 +351,8 @@ The following document fields are included in a standard AIQ connector deploymen
 3. Prices
 4. Category Codes
 5. Subcategory Codes
-6. Vendor Numbers
-7. Weights
-8. Quantities Sold
+6. Weights
+7. Quantities Sold
 
 #### Document Sync Schedule
 
