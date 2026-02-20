@@ -176,24 +176,24 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 - Controls when AIQ customer records are automatically created in Counterpoint.
 
   - **When `Auto Create AIQ Persona` = `YES`** 
-    - AIQ customer records are automatically created when a customer is added to Counterpoint.
+    - An AIQ customer record is automatically created when a new customer is added to Counterpoint.
 
   - **When `Auto Create AIQ Persona` = `NO`** 
     - AIQ customer records must be created manually.
 
-- **Important:** In both cases, creation behavior also depends on **Send Even If No Email or Phone** (below).
+- **Important:** In both cases, creation behavior also depends on **Send Even If No Email or Phone** (see below).
 
 ### Send Even If No Email or Phone
 - Controls whether an AIQ customer record can be created when the customer has **no email address and no valid phone value**.
 
   - **When `Send Even If No Email or Phone` = `NO`**
-    - A new AIQ customer is created **only if** the customer has **either** Email Address **or** Phone populated
-    - If auto enroll is being used, customers will only be created if either phone or email is populated. (A note will be written to the message center if both values are blank.)
-    - If manual create is being used, users will be prevented from creating an AIQ customer record without one of these values. (An error will be thrown if a user attempts to create a record with both values blank.).
+    - A new AIQ customer is created **only if** the customer has **either** Email Address **or** Phone populated.
+    - If auto enrollment is enabled, customers are created only when either phone or email is populated. A message is written to the Message Center if both values are blank.
+    - If manual creation is used, users are prevented from creating an AIQ customer record without one of these values. An error is returned if both values are blank.
 
   - **When `Send Even If No Email or Phone` = `YES`**
     - A new AIQ customer is created even if the customer does not have an email address or phone number.
-    - AIQ accepts Personas even without this contact information.
+    - AIQ accepts Personas contact information.
 
 ### Email Address for AIQ
 - Defines which Counterpoint Customer Record email address field is used to populate the AIQ **Email Address** persona property.
