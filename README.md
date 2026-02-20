@@ -182,6 +182,20 @@ Controls when AIQ customer records are automatically created in Counterpoint.
 **NO**  
 - AIQ customer records must be created manually.
 
+**Important:** In both cases, creation behavior also depends on **Send Even If No Email or Phone** (below).
+
+### Send Even If No Email or Phone
+Controls whether an AIQ customer record can be created when the customer has **no email address and no valid phone value**.
+
+**When `Send Even If No Email or Phone` = `NO`**
+  A new AIQ customer is created **only if** the customer has **either** Email Address **or** Phone populated
+  - If auto enroll is being used, customers will only be created if either phone or email is populated. (A note will be written to the message center if both values are blank.)
+  - If manual create is being used, users will be prevented from creating an AIQ customer record without one of these values. (An error will be thrown if a user attempts to create a record with both values blank.).
+
+**When `Send Even If No Email or Phone` = `YES`**
+  A new AIQ customer is created even if the customer does not have an email address or phone number.
+  - AIQ accepts Personas even without this contact information.
+
 ### Phone # for AIQ
 - Defines which Counterpoint Customer Record phone number field is used to populate the AIQ **Phone Number** persona property.
 - Supported options: **Mobile Phone 1** or **Phone 1**
