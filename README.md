@@ -187,7 +187,7 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 - Controls whether an AIQ customer record can be created when the customer has **no email address and no valid phone value**.
 
   - **When `Send Even If No Email or Phone` = `NO`**
-    - A new AIQ customer is created **only if** the customer has **either** Email Address **or** Phone populated.
+    - A new AIQ customer is created **only if** the customer has **either/both** Email Address **or** Phone populated.
     - If auto enrollment is enabled, customers are created only when either phone or email is populated. A message is written to the Message Center if both values are blank.
     - If manual creation is used, users are prevented from creating an AIQ customer record without one of these values. An error is returned if both values are blank.
 
