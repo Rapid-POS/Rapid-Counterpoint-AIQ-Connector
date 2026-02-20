@@ -175,11 +175,11 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 ### Auto Create AIQ Persona
 - Controls when AIQ customer records are automatically created in Counterpoint.
 
-  - **EMAIL ONLY**  
+  - **When `Auto Create AIQ Persona` = `EMAIL ONLY`** 
     - An AIQ customer record is automatically created when a customer is added to Counterpoint with **Email Address 1**.  
     - If the configured phone number (**Mobile Phone 1** or **Phone 1**) is also present and valid, it will be included on the AIQ Persona.
 
-  - **NO**  
+  - **When `Auto Create AIQ Persona` = `NO`** 
     - AIQ customer records must be created manually.
 
 - **Important:** In both cases, creation behavior also depends on **Send Even If No Email or Phone** (below).
