@@ -67,7 +67,7 @@ The AIQ Connector adds an **AIQ Customers** button within Counterpoint, providin
 
 Depending on configuration, the email address on the AIQ customer record is populated from either **Email Address 1** or **Email Address 2** on the Counterpoint customer record. Likewise, the phone number is populated from either **Phone 1** or **Mobile Phone 1** on the Counterpoint customer record, **only when it meets the following criteria**:
 - Contains **exactly 10 numeric digits**
-- Does **not** include letters '
+- Does **not** include letters 
 - If the configured phone number field contains more than or fewer than 10 digits, or if it includes letters, the number will **not** be pushed to AIQ.
 
 Note: If the **Send Even If No Email or Phone** configuration is set to yes (checked), then a customer can be synced even without contact information.
