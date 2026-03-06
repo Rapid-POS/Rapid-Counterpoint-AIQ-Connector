@@ -7,8 +7,6 @@ Updated 3/5/2026
 
 The Rapid AIQ Connector syncs customer and transactional data from Counterpoint to AIQ to support targeted email and SMS marketing. AIQ specializes in regulated industries, including firearms.
 
-The connector syncs customer information and sales activity for customers with a populated **Email Address 1** in Counterpoint. If configured, **Phone 1** or **Mobile Phone 1** can also be included to support SMS marketing.
-
 ### AIQ Customer Unification
 
 AIQ automatically identifies and unifies customer records that represent the same individual by matching key personally identifiable information (PII), such as email address and phone number. When multiple records share one or more of these identifiers, AIQ merges them into a single **Persona** (master customer profile) rather than treating them as separate contacts.
