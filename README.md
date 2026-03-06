@@ -1,5 +1,5 @@
 # Rapid POS AIQ Connector - Version 1.0
-Updated 2/19/2026
+Updated 3/5/2026
 
 ---
 
@@ -65,13 +65,12 @@ The AIQ Connector adds an **AIQ Customers** button within Counterpoint, providin
 
 ![Customer Record - AIQ Customers Button](./images/counterpoint-customer-record-AIQ-customers-button.png)
 
-The email address on the AIQ customer record is populated from **Email Address 1** on the Counterpoint customer record.
-
-Depending on configuration, the phone number is populated from either **Phone 1** or **Mobile Phone 1** on the Counterpoint customer record, **only when it meets the following criteria**:
+Depending on configuration, the email address on the AIQ customer record is populated from either **Email Address 1** or **Email Address 2** on the Counterpoint customer record. Likewise, the phone number is populated from either **Phone 1** or **Mobile Phone 1** on the Counterpoint customer record, **only when it meets the following criteria**:
 - Contains **exactly 10 numeric digits**
-- Does **not** include letters 
+- Does **not** include letters '
+- If the configured phone number field contains more than or fewer than 10 digits, or if it includes letters, the number will **not** be pushed to AIQ.
 
-If the configured phone number field contains more than or fewer than 10 digits, or if it includes letters, the number will **not** be pushed to AIQ.
+Note: If the **Send Even If No Email or Phone** configuration is set to yes (checked), then a customer can be synced even without contact information.
 
 ![AIQ Customer Record](./images/counterpoint-AIQ-customer-record.png)
 
@@ -166,7 +165,7 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 ### Workgroup
 - Customer activity sometimes requires a defined workgroup. If needed, this connector will use workgroup **234**, which is created during the installation process.
 
-### Message Group ID
+### Message Group Number
 - Defines the Message Group ID (`MAIL_GRP_ID`) used for AIQ connector alert messages in Counterpoint.
 - When an error or issue is encountered, alerts are sent to the Counterpoint users associated with this message group.
 - It is recommended to assign 1–3 users to receive these alerts.
@@ -204,12 +203,12 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 - Supported options: **`Mobile Phone 1`** or **`Phone 1`**
 - If the selected phone field does not meet the _exactly 10 numeric digits_ requirement, the phone number will not be sent to AIQ
 
-### Last Customer Sync Date (UTC)
-- Displays the most recent date a customer record was successfully synced to AIQ.
-
 ### Max Customers to Sync
 - Used to optimize connector performance.
 - Defines the maximum number of customers that can be synced in a single connector run.
+
+### Last Customer Sync Date (UTC)
+- Displays the most recent date a customer record was successfully synced to AIQ.
 
 ### Documents Up Start Date
 - Used to limit the furthest historical date from which documents will sync.
@@ -220,27 +219,11 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 - Ensures documents sync after a power outage or temporary connector interruption.
 - Regardless of this setting, the **Documents Up Start Date** is always respected as the absolute limit.
 
-### Documents Up Queue Batch Size _(Acts as the maximum documents allowed per run)_
-- Used to optimize connector performance.
-- Defines the **maximum total number of documents** that the connector is allowed to sync from the Documents Up queue during a single connector execution.
-- Although labeled as a “batch size,” this value functions as a **hard ceiling** on how many documents may be synced in one run. Once this limit is reached, no additional documents are processed until the next scheduled execution.
-- This setting is used to prevent large backlogs from syncing all at once, control connector runtime and avoid AIQ API rate limiting.
+### Documents Up Queue Batch Size
+- [ASK DENNIS]
 
-### Max Documents Up Queue to Sync _(Acts as the per-batch processing size)_
-- Used to optimize connector performance.
-- Defines the **number of documents processed at a time** when syncing documents from the **AIQ Documents Queue**.
-- During a single connector run, documents are processed in batches using this value. As the run progresses, the connector dynamically adjusts the final batch size to ensure that the total number of documents synced does not exceed the Documents Up Queue Batch Size limit.
-- For example:
-  - If the batch size is 100 and the maximum allowed is 500, the connector will process up to five batches.
-  - If fewer than 100 documents remain before reaching the maximum, the final batch will be reduced accordingly.
-- Works in conjunction with **Documents Up Queue Batch Size**
-  - During each connector execution, the connector tracks how many documents have already been synced in the current run.
-  - Before processing each batch, it evaluates how many documents remain before reaching the maximum allowed.
-  - The batch size is dynamically reduced if needed so the connector never exceeds the configured maximum.
-- Important: The Documents Up Queue Batch Size value should be greater than or equal to the Max Documents Up Queue to Sync value to ensure predictable batching behavior.
-
-### Retain Queue Days
-- The number of days that documents are retained in the queue for troubleshooting purposes. 
+### Max Documents Up Queue to Sync
+- [ASK DENNIS]
 
 ### Other Configuration Options
 Additional configuration fields exist for internal use by Rapid programmers. These options are used to optimize performance or assist with troubleshooting and should not be modified by end users.
@@ -264,7 +247,7 @@ When the connector processes posted tickets:
 - Only tickets from Counterpoint Store IDs that are mapped to the corresponding AIQ account are included in the Documents Up sync process.
 - Tickets from stores that are **not mapped** are ignored and will not be sent to AIQ.
 
-This allows precise control over which store locations contribute transactional data to each AIQ account.
+This allows precise control over which store locations contribute transactional data to each AIQ account. Multiple stores can be synced to a single AIQ account.
 
 ---
 
@@ -280,8 +263,6 @@ Note: This is best viewed in _table view_.
 
 Calculated fields are not included by default. Any request to add calculated fields must be reviewed and quoted separately by Rapid.
 
-**Note:** **Email Address 1** is a required field and must be sent to AIQ.
-
 ### Standard Customer Record Fields Sent to AIQ
 
 The following customer fields are included in a standard AIQ connector deployment:
@@ -290,18 +271,13 @@ The following customer fields are included in a standard AIQ connector deploymen
 2. Phone
 3. Customer Number
 4. First Name  
-5. Last Name  
-6. Address 1  
-7. Address 2  
-8. City  
-9. State  
-10. Zip Code  
-11. Country  
-12. A/R Balance  
-13. Customer Category  
-14. First Sale Date  
-15. Last Sale Date  
-16. Loyalty Point Balance  
+5. Last Name
+6. Customer Type (cash or AR)
+7. Address 1  
+8. Address 2  
+9. City  
+10. State  
+11. Zip Code  
 
 Note: The AIQ Connector currently supports **customers up** only. Customer records can be pushed from Counterpoint to AIQ, but customers cannot be downloaded (imported) from AIQ into Counterpoint.
 
@@ -326,15 +302,14 @@ The following item and inventory fields are included in a standard AIQ connector
 1. Item Number
 2. Description
 3. Long Description
-4. Item Type  
+4. Item Type (Inventory, Non-Inventory, Service, Discount)
 5. Price 1 
 6. Regular Price
 7. Stocking Unit
 8. Category Code
-9. Vendor Number 
-10. Barcode 
-11. Quantity  
-12. Last Maintained Date
+9. Barcode 
+10. Quantity  
+11. Last Maintained Date
 
 ---
 
@@ -359,17 +334,18 @@ The following document fields are included in a standard AIQ connector deploymen
 2. Store ID
 3. Business Date
 4. Customer Number
-5. Discount Amount
-6. Total
+5. Total
 
 #### Ticket History Line Data
 1. Item Numbers
 2. Descriptions
-3. Prices
+3. Extended Prices (accounts for price multiplied by quanity as well as any discounts)
 4. Category Codes
 5. Subcategory Codes
-6. Weights
+6. Weights (not currently visible in the AIQ user interface)
 7. Quantities Sold
+
+If desired, a value for item brand can also be synced with the ticket history line data.
 
 #### Document Sync Schedule
 
@@ -514,7 +490,7 @@ When a customer is synced to AIQ, the connector stores the associated **AIQ Pers
 
 ### Updating Email Address and Phone Number
 
-If **Email Address 1** or the configured phone number (**Mobile Phone 1** or **Phone 1**) is updated in Counterpoint for a customer who already has an AIQ profile:
+If the configured email address (**Email Address 1** or **Email Address 2**) or the configured phone number (**Mobile Phone 1** or **Phone 1**) is updated in Counterpoint for a customer who already has an AIQ profile:
 
 - The connector sends the updated email address or phone number to AIQ along with the full customer record.
 - AIQ evaluates the updated data and applies its own consolidation logic, which may result in profile updates or persona merging within AIQ.
