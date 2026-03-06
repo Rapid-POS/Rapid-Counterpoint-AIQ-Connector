@@ -220,10 +220,10 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 - Regardless of this setting, the **Documents Up Start Date** is always respected as the absolute limit.
 
 ### Documents Up Queue Batch Size
-- [ASK DENNIS]
+- This setting limits how many ticket records can be added to the queue when the connector retrieves historical tickets for a selected date range.
 
 ### Max Documents Up Queue to Sync
-- [ASK DENNIS]
+- This setting controls how many ticket records are sent to AIQ at a time when the system runs its scheduled queue synchronization.
 
 ### Other Configuration Options
 Additional configuration fields exist for internal use by Rapid programmers. These options are used to optimize performance or assist with troubleshooting and should not be modified by end users.
@@ -239,7 +239,7 @@ Each record in the AIQ Account Store Mapping table links:
 - An **AIQ Account**
 - A **Counterpoint Store ID**
 
-![AIQ Account Store Mapping](./images/counterpoint-AIQ-account-store-mapping.png)
+![AIQ Account Store Mapping in Table View](./images/counterpoint-AIQ-account-store-mapping-table-view.png)
 
 When the connector processes posted tickets:
 
