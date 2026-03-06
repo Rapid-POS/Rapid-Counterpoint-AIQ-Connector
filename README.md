@@ -5,7 +5,9 @@ Updated 3/5/2026
 
 ## Overview
 
-The Rapid AIQ Connector syncs customer and transactional data from Counterpoint to AIQ to support targeted email and SMS marketing. AIQ specializes in regulated industries, including firearms.
+The Rapid AIQ Connector syncs customer and transactional data from Counterpoint to AIQ to support targeted email and SMS marketing. 
+
+AIQ specializes in regulated industries, including firearms.
 
 ### AIQ Customer Unification
 
