@@ -333,8 +333,7 @@ The following document fields are included in a standard AIQ connector deploymen
 1. Document ID
 2. Store ID
 3. Business Date
-4. Customer Number
-5. Total
+4. Total
 
 #### Ticket History Line Data
 1. Item Numbers
