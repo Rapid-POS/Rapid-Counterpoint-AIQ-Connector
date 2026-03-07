@@ -235,6 +235,7 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
   - The connector sends documents from the queue to AIQ **up to this maximum limit**.
   - If more documents exist in the queue than this value, the remaining documents will be processed in subsequent connector runs.
 - This setting acts as a **safety limit** to prevent overwhelming the AIQ APIs.
+- Rapid recommends setting this value to approximately **150% of the client’s average daily ticket volume**. However, if this calculation results in a value **below the default of 500**, the setting should remain at **500**.
 
 ### Other Configuration Options
 Additional configuration fields exist for internal use by Rapid programmers. These options are used to optimize performance or assist with troubleshooting and should not be modified by end users.
