@@ -220,10 +220,21 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 - Regardless of this setting, the **Documents Up Start Date** is always respected as the absolute limit.
 
 ### Documents Up Queue Batch Size
-- This setting limits how many ticket records can be added to the queue when the connector retrieves historical tickets for a selected date range.
+- Defines the **maximum number of historical tickets** that may be added to the Documents Up queue during a single connector run.
+- In this context, **historical tickets** refers to previously posted ticket history that is synced to AIQ to **seed the AIQ platform with past sales data**, typically during the **initial installation of the connector**.
+- When the connector runs:
+  - All tickets posted **today** are first added to the queue (the most recent sales are prioritized).
+  - If the queue size is still **below the configured Max Documents Up Queue to Sync**, additional historical tickets may be added.
+  - The number of historical tickets added will not exceed the **Documents Up Queue Batch Size**.
+- If the queue size is already **greater than or equal to the Max Documents Up Queue to Sync**, no historical tickets will be added during that connector run.
+- This setting helps gradually process historical tickets without overwhelming the AIQ APIs.
 
 ### Max Documents Up Queue to Sync
-- This setting controls how many ticket records are sent to AIQ at a time when the system runs its scheduled queue synchronization.
+- Defines the **maximum number of documents (tickets)** that can be synced to AIQ during a single connector execution.
+- During each run:
+  - The connector sends documents from the queue to AIQ **up to this maximum limit**.
+  - If more documents exist in the queue than this value, the remaining documents will be processed in subsequent connector runs.
+- This setting acts as a **safety limit** to prevent overwhelming the AIQ APIs.
 
 ### Other Configuration Options
 Additional configuration fields exist for internal use by Rapid programmers. These options are used to optimize performance or assist with troubleshooting and should not be modified by end users.
