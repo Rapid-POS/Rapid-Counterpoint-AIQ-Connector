@@ -346,7 +346,7 @@ The following document fields are included in a standard AIQ connector deploymen
 1. Document ID
 2. Store ID
 3. Business Date
-4. Total
+4. Total*
 
 #### Ticket History Line Data
 1. Item Numbers
@@ -358,6 +358,8 @@ The following document fields are included in a standard AIQ connector deploymen
 7. Quantities Sold
 
 If desired, a value for item brand can also be synced with the ticket history line data.
+
+*_While the ticket total is sent to AIQ, it is used for reference only. AIQ calculates the ticket “total” based on the line item prices. As a result, the calculated total in AIQ does not include taxes, fees, or other non-line-item charges that may exist on the original Counterpoint ticket._
 
 #### Document Sync Schedule
 
