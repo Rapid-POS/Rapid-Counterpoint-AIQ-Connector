@@ -290,7 +290,9 @@ The following customer fields are included in a standard AIQ connector deploymen
 10. State  
 11. Zip Code  
 
-Note: The AIQ Connector currently supports **customers up** only. Customer records can be pushed from Counterpoint to AIQ, but customers cannot be downloaded (imported) from AIQ into Counterpoint.
+**Important Notes on Connector Limitations**
+- The AIQ Connector currently supports **customer data syncing from Counterpoint to AIQ only**. Customer records are **not imported from AIQ into Counterpoint**, and changes made in AIQ will not update Counterpoint customer records.
+- Synchronization of **loyalty program data** is **not currently supported** by this connector. While AIQ may support loyalty functionality, loyalty balances, points, or program activity from Counterpoint are not included in the customer data synced to AIQ.
 
 ---
 
