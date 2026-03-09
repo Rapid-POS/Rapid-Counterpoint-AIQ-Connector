@@ -349,10 +349,11 @@ Calculated fields are not included by default. Any request to add calculated fie
 The following document fields are included in a standard AIQ connector deployment:
 
 #### Ticket History Header Data
-1. Document ID
-2. Store ID
-3. Business Date
-4. Total*
+1. Customer Number
+2. Document ID
+3. Store ID
+4. Business Date
+5. Total*
 
 #### Ticket History Line Data
 1. Item Numbers
