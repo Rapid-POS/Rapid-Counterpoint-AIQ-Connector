@@ -140,7 +140,11 @@ Each AIQ item record includes a sync status value indicating its current state i
 
 ### Item Merge
 
-When two items are merged in Counterpoint, the connector notifies AIQ of the merge using the `createUpdateSale` endpoint, after which AIQ processes the related product and sale data according to its own logic.
+When two items are merged in Counterpoint, the connector notifies AIQ of the merge using the `createUpdateSale` endpoint. AIQ then processes the related product and sale data according to its own internal logic.
+
+Because of this behavior, all tickets are retained in the **AIQ Documents Queue**. This allows the connector to re-sync historical sales when item merges occur.
+
+During an item merge, a **new iteration of the affected ticket** is created and synced to AIQ. The previous iteration of the ticket is retained in the **AIQ Documents Queue**, allowing the connector to preserve the original record while sending the updated version that reflects the merged item.
 
 ---
 
