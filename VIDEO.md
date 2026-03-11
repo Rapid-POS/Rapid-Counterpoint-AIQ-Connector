@@ -1,6 +1,6 @@
 # AIQ Connector Video
 
-The video is posted on Rapid's YouTube channel: [**Rapid POS: AIQ Connector Overview**](https://www.youtube.com)   
+The video is posted on Rapid's YouTube channel:
 
 ---
 
