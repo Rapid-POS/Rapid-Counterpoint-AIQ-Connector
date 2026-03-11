@@ -443,6 +443,8 @@ The **AIQ Items Quantity on Hand View** displays the current summed **quantity o
 
 For clients with multiple inventory locations in Counterpoint, the **CRM_AIQ location group** determines which locations are included when calculating the **total** quantity on hand. Quantities from the included locations are aggregated and displayed in this view.
 
+![AIQ Location Group](./images/counterpoint-location-group-CRM_AIQ.png)
+
 In Counterpoint, **quantity on hand** is updated only when specific transactions are posted. These transactions include posting a ticket, posting a receiver, posting an inventory adjustment, posting a transfer out, and posting a physical count.
 
 **Note:** AIQ does not currently support location-level inventory quantities, so a summed quantity is provided instead.
