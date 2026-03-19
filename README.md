@@ -1,5 +1,5 @@
 # Rapid POS AIQ Connector - Version 1.0
-Updated 3/11/2026
+Updated 3/19/2026
 
 ---
 
@@ -350,10 +350,11 @@ The following document fields are included in a standard AIQ connector deploymen
 
 #### Ticket History Header Data
 1. Customer Number
-2. Document ID
-3. Store ID
-4. Business Date
-5. Total*
+2. Ticket Number
+3. Document ID
+4. Store ID
+5. Business Date
+6. Total*
 
 #### Ticket History Line Data
 1. Item Numbers
