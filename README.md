@@ -248,7 +248,7 @@ Additional configuration fields exist for internal use by Rapid programmers. The
 
 ## SECTION 4: AIQ Account Store Mapping
 
-The **AIQ Account Store Mapping** feature controls which Counterpoint store locations are included when sending ticket history (document) data to AIQ for a specific AIQ account. Only ticket history data from mapped stores is eligible to be queued and synced to AIQ.
+The **AIQ Account Store Mapping** feature controls which Counterpoint stores are included when sending ticket history (document) data to AIQ for a specific AIQ account. Only ticket history data from mapped stores is eligible to be queued and synced to AIQ.
 
 Each record in the AIQ Account Store Mapping table links:
 
