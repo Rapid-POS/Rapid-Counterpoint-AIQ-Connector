@@ -523,33 +523,28 @@ The following data is synced **once per day** according to the configured **Item
 - Items
 - Inventory (quantities)
 
-> **Important:** Customer data must be synced to AIQ **before** that customer’s ticket (document) data is sent.  
-> If a corresponding **AIQ Persona** does not yet exist, AIQ will reject the ticket data.  
-> For this reason, customer sync is always processed ahead of document sync to ensure successful ingestion of transactional data.
+**Important:** Customer data must be synced to AIQ **before** that customer’s ticket (document) data is sent.  
+- If a corresponding **AIQ Persona** does not yet exist, AIQ will reject the ticket data.  
+- For this reason, customer sync is always processed ahead of document sync to ensure successful ingestion of transactional data.
 
 ### Rollback
-
 Each connector run begins with a **rollback process**.
-
 - The rollback process resets records that were previously assigned to an active sync batch but were not successfully processed during that run.
 - This ensures that unprocessed records are safely returned to the queue so they can be included in the next connector run with a new batch assignment.
 
 #### How the Rollback Process Works
-
 During each connector execution:
-
 - Records selected for syncing (customers, items, or documents) are:
-  - Assigned a **Process ID (PID)**, which uniquely identifies the batch
   - Updated to a sync status of **2 (active sync queue)**
-- The connector processes records for a fixed execution window, as defined by the configured **Daily Event Execution Time** or **Item Sync Event Execution Time** schedules (typically around one hour).
+  - Assigned a **Process ID (PID)**, which uniquely identifies the batch
+- The connector processes records for a fixed period of time, as defined by the configured **Daily Event Execution Time** or **Item Sync Event Execution Time** schedules (typically around one hour).
 - If the connector stops or restarts before all records in the batch are processed, the remaining records must be reassigned to a new batch.
 
 When the rollback process runs:
-
 - Records in an **active (status 2)** state are reset to **pending (status 1)**
 - Their previous batch assignment is cleared by setting the **Process ID to 0 (PID = 0)** so they can be reassigned to a new batch during the next run
 
-> **Important:** The rollback process does not resend data to AIQ. It only resets records in Counterpoint so they can be included in a future connector run.
+**Important:** The rollback process does not resend data to AIQ. It only resets records in Counterpoint so they can be included in a future connector run.
 
 ---
 
