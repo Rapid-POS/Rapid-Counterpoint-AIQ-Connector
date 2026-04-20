@@ -1,5 +1,5 @@
 # Rapid POS AIQ Connector - Version 1.0
-Updated 3/19/2026
+Updated 4/20/2026
 
 ---
 
@@ -241,8 +241,23 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 - This setting acts as a **safety limit** to prevent overwhelming the AIQ APIs.
 - Rapid recommends setting this value to approximately **150% of the client’s average daily ticket volume**. However, if this calculation results in a value **below the default of 500**, the setting should remain at **500**.
 
-### Other Configuration Options
-Additional configuration fields exist for internal use by Rapid programmers. These options are used to optimize performance or assist with troubleshooting and should not be modified by end users.
+### Daily Event Execution Time and Item Sync Execution Time
+- See [Section 14: AIQ Connector Execution and Sync Timing](#section-14-aiq-connector-execution-and-sync-timing) for details. 
+
+### Manual Run Connector Execution Time and Manual Run Connector
+- See [Section 12: Run AIQ Connector Button](#section-12-run-aiq-connector-button) for details. 
+
+### Log Max Files to Keep and Log Max File Size
+- By default, the connector retains **10 log files**, each up to **10 MB** in size.
+- This configuration typically provides sufficient historical data for troubleshooting without consuming excessive server storage.
+- A new log file is created each day.
+- If extended log history is required, these settings can be adjusted by Rapid programmers.
+
+### Mark Alerts as Read After Days
+- The default value for this setting is **3 days**.
+- To keep recent alerts visible, the connector automatically marks messages older than the configured number of days as **read** for all users.
+- This prevents older messages from repeatedly appearing as pop-ups when logging into Counterpoint, helping reduce workflow interruptions.
+- To manually mark more recent messages as read (to suppress pop-ups), see [Section 13: Mark All AIQ Messages as Read](#section-13-mark-all-aiq-messages-as-read).
 
 ---
 
@@ -496,7 +511,7 @@ Marking messages as read stops the pop-up notifications but does **not** delete 
 
 The AIQ Connector operates as a **Windows Service**, automatically syncing customer personas, item and inventory data, and transactional documents between Counterpoint and AIQ.
 
-The connector runs in the background and processes different types of data on **separate schedules**, following recommendations from the AIQ platform to optimize performance and API usage.
+The connector runs in the background and processes different types of data on **separate CRON schedules**, following recommendations from the AIQ platform to optimize performance and API usage.
 
 ### Daily Event Execution Time
 The following data is synced **once per day** according to the configured **Daily Event Execution Time** (default **10:00 PM**):
@@ -504,7 +519,37 @@ The following data is synced **once per day** according to the configured **Dail
 - Posted tickets
 
 ### Item Sync Event Execution Time
-Item and inventory data is synced **once per day** according to the configured **Item Sync Event Execution Time** (default **10:00 PM**):
+The following data is synced **once per day** according to the configured **Item Sync Event Execution Time** (default **11:00 PM**):
+- Items
+- Inventory (quantities)
+
+> **Important:** Customer data must be synced to AIQ **before** that customer’s ticket (document) data is sent.  
+> If a corresponding **AIQ Persona** does not yet exist, AIQ will reject the ticket data.  
+> For this reason, customer sync is always processed ahead of document sync to ensure successful ingestion of transactional data.
+
+### Rollback
+
+Each connector run begins with a **rollback process**.
+
+- The rollback process resets records that were previously assigned to an active sync batch but were not successfully processed during that run.
+- This ensures that unprocessed records are safely returned to the queue so they can be included in the next connector run with a new batch assignment.
+
+#### How the Rollback Process Works
+
+During each connector execution:
+
+- Records selected for syncing (customers, items, or documents) are:
+  - Assigned a **Process ID (PID)**, which uniquely identifies the batch
+  - Updated to a sync status of **2 (active sync queue)**
+- The connector processes records for a fixed execution window, as defined by the configured **Daily Event Execution Time** or **Item Sync Event Execution Time** schedules (typically around one hour).
+- If the connector stops or restarts before all records in the batch are processed, the remaining records must be reassigned to a new batch.
+
+When the rollback process runs:
+
+- Records in an **active (status 2)** state are reset to **pending (status 1)**
+- Their previous batch assignment is cleared by setting the **Process ID to 0 (PID = 0)** so they can be reassigned to a new batch during the next run
+
+> **Important:** The rollback process does not resend data to AIQ. It only resets records in Counterpoint so they can be included in a future connector run.
 
 ---
 
