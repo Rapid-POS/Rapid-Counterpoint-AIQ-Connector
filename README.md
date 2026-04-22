@@ -72,9 +72,9 @@ Depending on configuration, the email address on the AIQ customer record is popu
 
 **Note:** If the **Send Even If No Email or Phone** configuration is set to yes (checked), then a customer can be synced even without contact information.
 
-- **Invalid Email** – This box is checked when the customer’s email address does not follow the valid format (e.g., `_____@___.___`).
+**Invalid Email** – This box is checked when the customer’s email address does not follow the valid format (e.g., `_____@___.___`).
 
-- **Invalid Phone** – This box is checked when the customer's phone number, after trimming/sanitizing, does not contain **exactly 10 numeric digits**.
+**Invalid Phone** – This box is checked when the customer's phone number, after trimming/sanitizing, does not contain **exactly 10 numeric digits**.
 
 It is recommended to periodically filter for **Invalid Email = YES** or **Invalid Phone = YES** and correct these records as needed to ensure successful syncing.
 
