@@ -447,7 +447,7 @@ When sending document data to AIQ, each posted ticket is first placed into a que
 
 ![AIQ Documents Queue](./images/counterpoint-AIQ-documents-queue-table-view.png)
 
-### Queue Status Values
+### AIQ Sync Status Codes
 
 Each document in the queue includes a sync status value indicating its current state in the sync process:
 
