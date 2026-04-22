@@ -95,8 +95,6 @@ Each AIQ customer record includes a sync status value indicating its current sta
 - **0** – Fully synced; nothing pending  
 - **1** – Recently created or updated; will sync on the next connector run  
 - **2** – Customer is currently in the active sync queue  
-- **5** – Invalid email address  
-- **6** – Invalid phone number  
 - **9** – Sync error; requires remediation before it can be re-synced  
 
 ---
@@ -406,7 +404,7 @@ Each AIQ customer record includes a **sync status** that indicates its current s
 For example, you may want to identify that **43 customers have an invalid email address (status 5)** so those records can be reviewed and corrected.
 
 The **AIQ Customer Status View** displays a summary table showing:
-- Each sync status code (0, 1, 2, 5, 6, 9)
+- Each sync status code (0, 1, 2, 9)
 - The total number of customer records currently associated with that status
 
 **Notes:**
