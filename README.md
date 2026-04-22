@@ -95,7 +95,11 @@ Each AIQ customer record includes a sync status value indicating its current sta
 - **0** – Fully synced; nothing pending  
 - **1** – Recently created or updated; will sync on the next connector run  
 - **2** – Customer is currently in the active sync queue  
-- **9** – Sync error; requires remediation before it can be re-synced  
+- **9** – Sync error; requires remediation before it can be re-synced
+
+### Customer Merge and Updates
+
+Customers in Counterpoint can be merged together and may have their information updated from time to time. See [Section 15: Managing Customer Email and Phone Updates](#section-15-managing-customer-email-and-phone-updates) for details on how the connector handles these types of changes.
 
 ---
 
