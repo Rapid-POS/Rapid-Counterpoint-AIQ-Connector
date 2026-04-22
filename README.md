@@ -170,7 +170,7 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 ### Connector Version, Last Maintained By, Last Maintained
 - Displays the current connector version and the most recent maintenance information for reference.
 
-### Use Fast Endpoints Until
+### Use Fast Endpoints Until 
 - Defines a **date value** that controls which AIQ API endpoints are used by the connector.
   - When the current date is **prior to this value**, the connector uses **high-performance (undocumented) endpoints** to temporarily accelerate initial data syncing.
   - When the current date is **on or after this value**, the connector automatically switches to **standard AIQ endpoints**, which follow AIQ’s normal rate limits.
