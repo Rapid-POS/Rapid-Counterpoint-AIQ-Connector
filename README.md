@@ -451,10 +451,10 @@ When sending document data to AIQ, each posted ticket is first placed into a que
 
 Each document in the queue includes a status value indicating its current state in the sync process:
 
-- **0** – Document has already been synced to AIQ; nothing pending  
-- **1** – Document has been recently created or updated and will be added to the queue on the next connector run  
+- **0** – Fully synced; nothing pending  
+- **1** – Recently added to the queue, willy sync on the next connector run  
 - **2** – Document is currently in the active sync queue  
-- **9** – Document encountered an error and requires remediation before it can be re-synced
+- **9** – Sync error; requires remediation before it can be re-synced
 
 ---
 
