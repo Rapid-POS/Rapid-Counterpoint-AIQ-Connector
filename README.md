@@ -1,5 +1,5 @@
 # Rapid POS AIQ Connector - Version 1.0
-Updated 4/20/2026
+Updated 4/22/2026
 
 ---
 
@@ -74,7 +74,7 @@ Note: If the **Send Even If No Email or Phone** configuration is set to yes (che
 
 ![AIQ Customer Record](./images/counterpoint-AIQ-customer-record.png)
 
-When an AIQ customer record is created or updated in Counterpoint, it is flagged for synchronization. The customer sync process runs once daily according to the configured **Daily Event Execution Time** (default 10:00 PM).
+When an AIQ customer record is created or updated in Counterpoint, it is flagged for synchronization. The customer sync process runs once daily according to the configured **Daily Event Execution Time** (default 10:00 PM), and will continue to run until all batches are synced.
 
 After the data is received, the AIQ platform processes the update independently, and changes may take up to one day to become visible within AIQ, depending on AIQ processing timelines. 
 
@@ -111,7 +111,7 @@ Following ticket posting, AIQ item records are automatically created in Counterp
 
 **Note:** Items are only synced to AIQ after they are associated with a posted ticket. AIQ requires items to have sales data before they appear in the **My Analytics** section.
 
-When an AIQ item record is created or updated in Counterpoint (or it is present on a recently posted ticket), it is flagged for synchronization. The item sync process runs once daily according to the configured **Item Sync Event Execution Time** (default 10:00 PM).
+When an AIQ item record is created or updated in Counterpoint (or it is present on a recently posted ticket), it is flagged for synchronization. The item sync process runs once daily according to the configured **Item Sync Event Execution Time** (default 10:30 PM), and will continue to run until all batches are synced.
 
 After the data is received, the AIQ platform processes the update independently, and changes may take up to one day to become visible within AIQ, depending on AIQ processing timelines. 
 
@@ -166,6 +166,13 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 ### Connector Version, Last Maintained By, Last Maintained
 - Displays the current connector version and the most recent maintenance information for reference.
 
+### Use Fast Endpoints Until
+- Defines a **date value** that controls which AIQ API endpoints are used by the connector.
+  - When the current date is **prior to this value**, the connector uses **high-performance (undocumented) endpoints** to temporarily accelerate initial data syncing.
+  - When the current date is **on or after this value**, the connector automatically switches to **standard AIQ endpoints**, which follow AIQ’s normal rate limits.
+- This setting is **read-only** and is managed by Rapid programmers in coordination with AIQ when elevated rate limits are permitted.
+- During initial installation, this value is typically set to **approximately two weeks in the future** to allow faster processing of initial data loads. It may be adjusted as needed based on implementation requirements and AIQ guidance.
+
 ### Workgroup
 - Customer activity sometimes requires a defined workgroup. If needed, this connector will use workgroup **234**, which is created during the installation process.
 
@@ -174,6 +181,12 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 - When an error or issue is encountered, alerts are sent to the Counterpoint users associated with this message group.
 - It is recommended to assign 1–3 users to receive these alerts.
 - Note: This value must reference a valid Message Group containing the appropriate Counterpoint User ID values.
+
+### Mark Alerts as Read After Days
+- The default value for this setting is **3 days**.
+- To keep recent alerts visible, the connector automatically marks messages older than the configured number of days as **read** for all users.
+- This prevents older messages from repeatedly appearing as pop-ups when logging into Counterpoint, helping reduce workflow interruptions.
+- To manually mark more recent messages as read (to suppress pop-ups), see [Section 13: Mark All AIQ Messages as Read](#section-13-mark-all-aiq-messages-as-read).
 
 ### Auto Create AIQ Persona
 - Controls when AIQ customer records are automatically created in Counterpoint.
@@ -252,12 +265,6 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 - This configuration typically provides sufficient historical data for troubleshooting without consuming excessive server storage.
 - A new log file is created each day.
 - If extended log history is required, these settings can be adjusted by Rapid programmers.
-
-### Mark Alerts as Read After Days
-- The default value for this setting is **3 days**.
-- To keep recent alerts visible, the connector automatically marks messages older than the configured number of days as **read** for all users.
-- This prevents older messages from repeatedly appearing as pop-ups when logging into Counterpoint, helping reduce workflow interruptions.
-- To manually mark more recent messages as read (to suppress pop-ups), see [Section 13: Mark All AIQ Messages as Read](#section-13-mark-all-aiq-messages-as-read).
 
 ---
 
@@ -386,7 +393,7 @@ If desired, a value for item brand can also be synced with the ticket history li
 
 #### Document Sync Schedule
 
-Following ticket posting, AIQ item records are automatically added to a queue to be synced to AIQ. The document sync process runs once daily according to the configured **Daily Event Execution Time** (default 10:00 PM).
+Following ticket posting, AIQ item records are automatically added to a queue to be synced to AIQ. The document sync process runs once daily according to the configured **Daily Event Execution Time** (default 10:00 PM), and will continue to run until all batches are synced.
 
 After the data is received, the AIQ platform processes the sale independently, and changes may take up to one day to become visible within AIQ, depending on AIQ processing timelines. 
 
@@ -511,7 +518,7 @@ Marking messages as read stops the pop-up notifications but does **not** delete 
 
 The AIQ Connector operates as a **Windows Service**, automatically syncing customer personas, item and inventory data, and transactional documents between Counterpoint and AIQ.
 
-The connector runs in the background and processes different types of data on **separate CRON schedules**, following recommendations from the AIQ platform to optimize performance and API usage.
+The connector runs in the background and processes different types of data on **separate CRON schedules**, following recommendations from the AIQ platform to optimize performance and API usage. Data is pushed once per day, and under normal conditions, will continue to run until all batches are synced.
 
 ### Daily Event Execution Time
 The following data is synced **once per day** according to the configured **Daily Event Execution Time** (default **10:00 PM**):
@@ -519,7 +526,7 @@ The following data is synced **once per day** according to the configured **Dail
 - Posted tickets
 
 ### Item Sync Event Execution Time
-The following data is synced **once per day** according to the configured **Item Sync Event Execution Time** (default **11:00 PM**):
+The following data is synced **once per day** according to the configured **Item Sync Event Execution Time** (default **10:30 PM**):
 - Items
 - Inventory (quantities)
 
