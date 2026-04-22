@@ -407,7 +407,7 @@ After the data is received, the AIQ platform processes the sale independently, a
 
 Each AIQ customer record includes a **sync status** that indicates its current state in the connector process. In some cases, it is helpful to review how many customer records fall into a particular status category.
 
-For example, you may want to identify that **43 customers have an invalid email address (status 5)** so those records can be reviewed and corrected.
+For example, you may want to identify that **43 customers have encountered an error (status 9)** so those records can be reviewed and remediated.
 
 The **AIQ Customer Status View** displays a summary table showing:
 - Each sync status code (0, 1, 2, 9)
