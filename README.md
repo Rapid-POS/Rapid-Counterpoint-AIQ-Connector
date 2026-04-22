@@ -70,11 +70,11 @@ Depending on configuration, the email address on the AIQ customer record is popu
 - Does **not** include letters 
 - If the configured phone number field contains more than or fewer than 10 digits, or if it includes letters, the number will **not** be pushed to AIQ.
 
-Note: If the **Send Even If No Email or Phone** configuration is set to yes (checked), then a customer can be synced even without contact information.
+**Note:** If the **Send Even If No Email or Phone** configuration is set to yes (checked), then a customer can be synced even without contact information.
 
 ![AIQ Customer Record](./images/counterpoint-AIQ-customer-record.png)
 
-When an AIQ customer record is created or updated in Counterpoint, it is flagged for synchronization. The customer sync process runs once daily according to the configured **Daily Event Execution Time** (default 10:00 PM), and will continue to run until all batches are synced.
+When an AIQ customer record is created or updated in Counterpoint, it is flagged for synchronization. The customer sync process runs once daily according to the configured **Daily Event Execution Time** (default 10:00 PM), and will continue processing batches until all records are synced.
 
 After the data is received, the AIQ platform processes the update independently, and changes may take up to one day to become visible within AIQ, depending on AIQ processing timelines. 
 
@@ -111,7 +111,7 @@ Following ticket posting, AIQ item records are automatically created in Counterp
 
 **Note:** Items are only synced to AIQ after they are associated with a posted ticket. AIQ requires items to have sales data before they appear in the **My Analytics** section.
 
-When an AIQ item record is created or updated in Counterpoint (or it is present on a recently posted ticket), it is flagged for synchronization. The item sync process runs once daily according to the configured **Item Sync Event Execution Time** (default 10:30 PM), and will continue to run until all batches are synced.
+When an AIQ item record is created or updated in Counterpoint (or it is present on a recently posted ticket), it is flagged for synchronization. The item sync process runs once daily according to the configured **Item Sync Event Execution Time** (default 10:30 PM), and will continue processing batches until all records are synced.
 
 After the data is received, the AIQ platform processes the update independently, and changes may take up to one day to become visible within AIQ, depending on AIQ processing timelines. 
 
@@ -180,7 +180,7 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 - Defines the Message Group ID (`MAIL_GRP_ID`) used for AIQ connector alert messages in Counterpoint.
 - When an error or issue is encountered, alerts are sent to the Counterpoint users associated with this message group.
 - It is recommended to assign 1–3 users to receive these alerts.
-- Note: This value must reference a valid Message Group containing the appropriate Counterpoint User ID values.
+- This value must reference a valid Message Group containing the appropriate Counterpoint User ID values.
 
 ### Mark Alerts as Read After Days
 - The default value for this setting is **3 days**.
@@ -203,19 +203,19 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 - Controls whether an AIQ customer record can be created when the customer has **no email address and no valid phone value**.
 
   - **When `Send Even If No Email or Phone` = `NO`**
-    - A new AIQ customer is created **only if** the customer has **either/both** Email Address **or** Phone populated.
+    - A new AIQ customer is created **only if** the customer has **at least one** of Email Address **or** Phone populated.
     - If auto enrollment is enabled, customers are created only when either phone or email is populated. A message is written to the Message Center if both values are blank.
     - If manual creation is used, users are prevented from creating an AIQ customer record without one of these values. An error is returned if both values are blank.
 
   - **When `Send Even If No Email or Phone` = `YES`**
     - A new AIQ customer is created even if the customer does not have an email address or phone number.
-    - AIQ accepts Personas contact information.
+    - AIQ accepts Personas even without contact information.
 
 ### Email Address for AIQ
 - Defines which Counterpoint Customer Record email address field is used to populate the AIQ **Email Address** persona property.
 - Supported options: **`Email Address 1`** or **`Email Address 2`**
 
-### Phone # for AIQ
+### Phone Number for AIQ
 - Defines which Counterpoint Customer Record phone number field is used to populate the AIQ **Phone Number** persona property.
 - Supported options: **`Mobile Phone 1`** or **`Phone 1`**
 - If the selected phone field does not meet the _exactly 10 numeric digits_ requirement, the phone number will not be sent to AIQ
@@ -295,7 +295,7 @@ The **AIQ Field Mapping Customers Up** screen provides a user interface for mana
 
 This table defines how customer record data in Counterpoint maps to AIQ Persona properties. The standard deployment includes a predefined set of fields that are automatically synced. Adjustments to this table should generally be performed by a programmer.
 
-Note: This is best viewed in _table view_.
+**Note:** This is best viewed in _table view_.
 
 ![AIQ Field Mapping Customers Up in Table View](./images/counterpoint-AIQ-field-mapping-customers-up-table-view.png)
 
@@ -330,7 +330,7 @@ The **AIQ Field Mapping Items Up** screen provides a user interface for managing
 
 This table defines how item record data in Counterpoint maps to AIQ product fields. The standard deployment includes a predefined set of fields that are automatically synced. Adjustments to this table should generally be performed by a programmer.
 
-Note: This is best viewed in _table view_.
+**Note:** This is best viewed in _table view_.
 
 ![AIQ Field Mapping Items Up in Table View](./images/counterpoint-AIQ-field-mapping-items-up-table-view.png)
 
@@ -360,7 +360,7 @@ The **AIQ Field Mapping Documents Up** screen provides a user interface for mana
 
 This table defines how document data in Counterpoint maps to AIQ sale history fields. The standard deployment includes a predefined set of fields that are automatically synced. Adjustments to this table should generally be performed by a programmer.
 
-Note: This is best viewed in _table view_.
+**Note:** This is best viewed in _table view_.
 
 ![AIQ Field Mapping Documents Up in Table View](./images/counterpoint-AIQ-field-mapping-documents-up-table-view.png)
 
@@ -381,7 +381,7 @@ The following document fields are included in a standard AIQ connector deploymen
 #### Ticket History Line Data
 1. Item Numbers
 2. Descriptions
-3. Extended Prices (accounts for price multiplied by quanity as well as any discounts)
+3. Extended Prices (accounts for price multiplied by quantity as well as any discounts)
 4. Category Codes
 5. Subcategory Codes
 6. Weights (not currently visible in the AIQ user interface)
@@ -393,7 +393,7 @@ If desired, a value for item brand can also be synced with the ticket history li
 
 #### Document Sync Schedule
 
-Following ticket posting, AIQ item records are automatically added to a queue to be synced to AIQ. The document sync process runs once daily according to the configured **Daily Event Execution Time** (default 10:00 PM), and will continue to run until all batches are synced.
+Following ticket posting, AIQ item records are automatically added to a queue to be synced to AIQ. The document sync process runs once daily according to the configured **Daily Event Execution Time** (default 10:00 PM), and will continue processing batches until all records are synced.
 
 After the data is received, the AIQ platform processes the sale independently, and changes may take up to one day to become visible within AIQ, depending on AIQ processing timelines. 
 
@@ -441,7 +441,7 @@ For details on the meaning of each item sync status value, refer back to **SECTI
 
 ---
 
-## Section 10: AIQ Documents Queue
+## SECTION 10: AIQ Documents Queue
 
 When sending document data to AIQ, each posted ticket is first placed into a queue in Counterpoint. Tickets are then synced from this queue to AIQ on the next run of the connector.
 
@@ -458,7 +458,7 @@ Each document in the queue includes a status value indicating its current state 
 
 ---
 
-## Section 11: AIQ Items Quantity on Hand View
+## SECTION 11: AIQ Items Quantity on Hand View
 
 The **AIQ Items Quantity on Hand View** displays the current summed **quantity on hand** for each item that has an AIQ item record in Counterpoint.
 
@@ -518,7 +518,7 @@ Marking messages as read stops the pop-up notifications but does **not** delete 
 
 The AIQ Connector operates as a **Windows Service**, automatically syncing customer personas, item and inventory data, and transactional documents between Counterpoint and AIQ.
 
-The connector runs in the background and processes different types of data on **separate CRON schedules**, following recommendations from the AIQ platform to optimize performance and API usage. Data is pushed once per day, and under normal conditions, will continue to run until all batches are synced.
+The connector runs in the background and processes different types of data on **separate CRON schedules**, following recommendations from the AIQ platform to optimize performance and API usage. Data is pushed once per day, and under normal conditions, processing will continue until all batches are synced. 
 
 ### Daily Event Execution Time
 The following data is synced **once per day** according to the configured **Daily Event Execution Time** (default **10:00 PM**):
