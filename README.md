@@ -449,7 +449,7 @@ When sending document data to AIQ, each posted ticket is first placed into a que
 
 ### Queue Status Values
 
-Each document in the queue includes a status value indicating its current state in the sync process:
+Each document in the queue includes a sync status value indicating its current state in the sync process:
 
 - **0** – Fully synced; nothing pending  
 - **1** – Recently added to the queue, willy sync on the next connector run  
