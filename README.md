@@ -416,7 +416,7 @@ The **AIQ Customer Status View** displays a summary table showing:
 
 ![AIQ Customers Status View](./images/counterpoint-AIQ-customers-status-view-table-view.png)
 
-For details on the meaning of each customer sync status value, refer back to **SECTION 1: AIQ Customer Records**.
+For details on the meaning of each customer sync status value, refer back to [Section 1: AIQ Customer Records](#section-1-aiq-customer-records).
 
 ---
 
@@ -437,7 +437,7 @@ The **AIQ Item Status View** displays a summary table showing:
 
 ![AIQ Items Status View](./images/counterpoint-AIQ-items-status-view-table-view.png)
 
-For details on the meaning of each item sync status value, refer back to **SECTION 2: AIQ Item Records**.
+For details on the meaning of each item sync status value, refer back to [Section 2: AIQ Item Records](#section-2-aiq-item-records).
 
 ---
 
