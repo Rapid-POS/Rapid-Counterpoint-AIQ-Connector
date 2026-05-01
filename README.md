@@ -1,5 +1,5 @@
-# Rapid POS AIQ Connector - Version 1.0
-Updated 4/22/2026
+# Rapid POS AIQ Connector - Version 1.1
+Updated 5/1/2026
 
 ---
 
@@ -179,7 +179,7 @@ For clients who use **multiple AIQ accounts**, a separate configuration record w
 ### Use Fast Endpoints Until 
 - Defines a **date value** that controls which AIQ API endpoints are used by the connector.
   - When the current date is **prior to this value**, the connector uses **high-performance (undocumented) endpoints** to temporarily accelerate initial data syncing.
-  - When the current date is **on or after this value**, the connector automatically switches to **standard AIQ endpoints**, which follow AIQ’s normal rate limits.
+  - When the current date is **on or after this value**, or when the value is null, the connector automatically switches to **standard AIQ endpoints**, which follow AIQ’s normal rate limits.
 - This setting is **read-only** and is managed by Rapid programmers in coordination with AIQ when elevated rate limits are permitted.
 - During initial installation, this value is typically set to **approximately two weeks in the future** to allow faster processing of initial data loads. It may be adjusted as needed based on implementation requirements and AIQ guidance.
 
