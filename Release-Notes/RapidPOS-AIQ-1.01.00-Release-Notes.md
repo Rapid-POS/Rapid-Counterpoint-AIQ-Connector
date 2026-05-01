@@ -16,6 +16,10 @@ _Release Date: May 4, 2026_
 
 - Fixed an issue where custom fields beginning with `USER_` (e.g., `USER_DOB`, `USER_SEX`) in customer and item field mappings were not included in the JSON payload sent to AIQ during data synchronization.
 
+- Fixed an issue where AIQ customer records were created even when required contact information (email and phone) was missing under certain configuration settings.
+  - When **Auto Enroll = Y** and **Send If No Email or Phone = N**, the system previously created an AIQ Customer Record even if both email and phone were missing.
+  - Updated the `AR_CUST` AIQ trigger to prevent creating AIQ customer records under this condition when creating new Counterpoint customers.
+
 - Improved overall syncing performance, resulting in faster and more efficient processing of document data.
 
 - Enhanced queue and internal processing performance to better handle large data volumes, improving reliability, scalability, and execution time.
