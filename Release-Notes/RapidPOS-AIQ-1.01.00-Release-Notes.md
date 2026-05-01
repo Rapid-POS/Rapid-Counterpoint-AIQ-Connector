@@ -19,7 +19,7 @@ _Release Date: May 4, 2026_
 - Improved overall syncing performance, resulting in faster and more efficient processing of document data.
 
 - Enhanced queue and internal processing performance to better handle large data volumes, improving reliability, scalability, and execution time.
-  - Replaced cursor-based logic with TVP-driven processing across key stored procedures, including:
+  - Replaced cursor-based logic with table-valued parameter (TVP) driven processing across key stored procedures, including:
     - `USER_SP_AIQ_QUEUE_CRON`
     - `USER_SP_AIQ_QUEUE_AFTER_PS_DOC_POST_RUN`
     - `USER_SP_BEFORE_ITEM_MERGE_AIQ`
@@ -37,5 +37,5 @@ _Release Date: May 4, 2026_
   - Prevention of duplicate records during processing
   - Improved handling of background processing errors
   - More accurate tracking of document processing status
-  - Fixed a primary key violation by preventing duplicate inserts into `@VALUES`, including a cleanup step during calculated column query processing
+  - Fixed primary key violation errors by preventing duplicate inserts into `@VALUES`, including a cleanup step during calculated column query processing
   - Corrected logic for determining `QUEUE_DOC_ITERATION`, ensuring accurate behavior when triggered by merge-related stored procedures
