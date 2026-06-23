@@ -1,5 +1,5 @@
 # Rapid POS AIQ Connector - Version 1.1
-Updated 5/1/2026
+Updated 6/23/2026
 
 ---
 
@@ -32,6 +32,9 @@ For more information, see:
 - Minimum SQL Server version: **2016**  
 - Minimum Windows Server version: **2016**  
 - Minimum PowerShell version: **5.1**  
+
+> [!WARNING]
+> Your environment must meet our [CI/CD Connector Requirements](https://github.com/Rapid-POS/Miscellaneous-Documents/blob/main/CICD-Connector-Requirements.md) (server access, firewall rules, etc.) before any install or upgrade. Troubleshooting, manual installs, or follow-up work resulting from unmet requirements will be billed at standard T&M rates.
 
 If you would like the AIQ connector but your system does not meet these minimum requirements, please consult your Care Team Lead (vCIO) for an upgrade quote.
 
