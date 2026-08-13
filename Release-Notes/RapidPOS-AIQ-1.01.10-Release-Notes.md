@@ -28,8 +28,6 @@ Fixed an issue where customers that had already finished syncing, or that failed
 ### Contact ID could fail to save after a successful match
 Fixed an issue where a customer's Alpine IQ contact ID could fail to save even though the match with Alpine IQ succeeded, which could leave a customer's record incompletely linked.
 
-- Also fixed a related issue where a customer with no email address on file was skipped over entirely instead of falling back to matching by phone number.
-
 ### A customer missing contact info could block an entire enrollment batch
 Fixed an issue where, during automatic customer enrollment, a single customer missing both email and phone could stop the rest of that batch's customers from being enrolled in Alpine IQ at all.
 
