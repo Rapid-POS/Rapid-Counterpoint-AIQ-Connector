@@ -1,6 +1,6 @@
 # Alpine IQ Connector v1.01.10 Release Notes
 
-**Release Date:** October 17, 2026
+**Release Date:** August 17, 2026
 
 _This release makes customer syncing to Alpine IQ faster and more reliable, fixes several cases where a customer's contact ID or sale details didn't come through correctly, and makes first-time setup safer._
 
