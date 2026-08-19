@@ -1,4 +1,4 @@
-# AIQ Connector V1.01.11 Release Notes
+# Rapid POS AIQ Connector V1.01.11 Release Notes
 
 **Release Date:** August 24th, 2026
 
