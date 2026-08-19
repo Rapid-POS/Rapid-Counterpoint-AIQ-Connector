@@ -1,6 +1,6 @@
 # Alpine IQ Connector V1.01.11 Release Notes
 
-**Release Date:** August 25th, 2026
+**Release Date:** August 24th, 2026
 
 This release makes the connector recover automatically from temporary Alpine IQ rate limits instead of marking customers, items, and sales as failed, and fixes a database error that could stop certain sales from syncing.
 
