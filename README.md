@@ -1,4 +1,4 @@
-# Rapid POS Alpine IQ (AIQ) Connector 
+# Rapid POS AIQ Connector 
 Updated 8/19/2026
 
 ---
