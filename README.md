@@ -341,7 +341,7 @@ The following customer fields are included in a standard AIQ connector deploymen
 
 **Important Notes on Connector Limitations**
 - The AIQ Connector currently supports **customer data syncing from Counterpoint to AIQ only**. Customer records are **not imported from AIQ into Counterpoint**, and changes made in AIQ will not update Counterpoint customer records.
-- Synchronization of **loyalty program data** is **not enabled by default** by this connector. The default field-mapping seed data has member.customAttributes.LoyaltyProgram/LoyaltyAvailablePoints → LOY_PGM_COD/LOY_PTS_BAL mappings present but commented out — meaning it's dormant. However, an account could enable those fields via the field-mapping configuration requested.
+- Synchronization of **loyalty program data** is **not enabled by default** by this connector. These fields can be added upon request. 
 - The connector does not manage **consent statuses** within AIQ. For example, it does not automatically opt customers in or out of email marketing, text message marketing, push notifications, age verification, loyalty programs, or other consent-based preferences. These must be managed directly within the AIQ platform. 
 
 ---
