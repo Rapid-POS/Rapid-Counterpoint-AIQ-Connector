@@ -1,4 +1,4 @@
-# AlpineIQ Connector V1.01.11 Release Notes
+# Alpine IQ Connector V1.01.11 Release Notes
 
 **Release Date:** August 25th, 2026
 
