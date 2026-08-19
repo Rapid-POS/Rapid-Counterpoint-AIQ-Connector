@@ -1,5 +1,5 @@
 # Rapid POS Alpine IQ (AIQ) Connector 
-Updated 6/23/2026
+Updated 8/19/2026
 
 ---
 
@@ -100,10 +100,16 @@ This view allows records to be displayed in **table view**, where filters can be
 
 Each AIQ customer record includes a sync status value indicating its current state in the sync process:
 
-- **0** – Fully synced; nothing pending  
-- **1** – Recently created or updated; will sync on the next connector run  
-- **2** – Customer is currently in the active sync queue  
-- **9** – Sync error; requires remediation before it can be re-synced
+| Code | Meaning |
+|------|---------|
+| 0 | Done/synced |
+| 1 | Pending |
+| 2 | In-flight ("active") |
+| 4 | Preparing (queue-only, set while `USER_SP_AIQ_QUEUE_ONE_DOCUMENT` builds the payload before flipping to 1) |
+| **5** | **Permanently invalid — no usable email/phone (customer-only, added via `USER_SP_AIQ_MEMBER_VALIDATION` a few sessions back)** |
+| **7** | **Rate-limited, retryable — new field added with V1.01.11 for customers, items, and queue events** |
+| 9 | Permanent error |
+
 
 ### Customer Merge and Updates
 
@@ -144,11 +150,15 @@ This view allows records to be displayed in **table view**, where filters can be
 ### AIQ Sync Status Codes
 
 Each AIQ item record includes a sync status value indicating its current state in the sync process:
-
-- **0** – Fully synced; nothing pending  
-- **1** – Recently created or updated; will sync on the next connector run  
-- **2** – Item is currently in the active sync queue  
-- **9** – Sync error; requires remediation before it can be re-synced
+| Code | Meaning |
+|------|---------|
+| 0 | Done/synced |
+| 1 | Pending |
+| 2 | In-flight ("active") |
+| 4 | Preparing (queue-only, set while `USER_SP_AIQ_QUEUE_ONE_DOCUMENT` builds the payload before flipping to 1) |
+| 5 | Permanently invalid — no usable email/phone (customer-only, added via `USER_SP_AIQ_MEMBER_VALIDATION` a few sessions back) |
+| 7 | Rate-limited, retryable — new field added with V1.01.11 for customers, items, and queue events |
+| 9 | Permanent error |
 
 ### Item Merge
 
@@ -331,7 +341,7 @@ The following customer fields are included in a standard AIQ connector deploymen
 
 **Important Notes on Connector Limitations**
 - The AIQ Connector currently supports **customer data syncing from Counterpoint to AIQ only**. Customer records are **not imported from AIQ into Counterpoint**, and changes made in AIQ will not update Counterpoint customer records.
-- Synchronization of **loyalty program data** is **not currently supported** by this connector. While AIQ may support loyalty functionality, loyalty balances, points, or program activity from Counterpoint are not included in the customer data synced to AIQ.
+- Synchronization of **loyalty program data** is **not enabled by default** by this connector. The default field-mapping seed data has member.customAttributes.LoyaltyProgram/LoyaltyAvailablePoints → LOY_PGM_COD/LOY_PTS_BAL mappings present but commented out — meaning it's dormant. However, an account could enable those fields via the field-mapping configuration requested.
 - The connector does not manage **consent statuses** within AIQ. For example, it does not automatically opt customers in or out of email marketing, text message marketing, push notifications, age verification, loyalty programs, or other consent-based preferences. These must be managed directly within the AIQ platform. 
 
 ---
@@ -418,7 +428,7 @@ Each AIQ customer record includes a **sync status** that indicates its current s
 For example, you may want to identify that **43 customers have encountered an error (status 9)** so those records can be reviewed and remediated.
 
 The **AIQ Customer Status View** displays a summary table showing:
-- Each sync status code (0, 1, 2, 9)
+- Each sync status code
 - The total number of customer records currently associated with that status
 
 **Notes:**
@@ -463,11 +473,15 @@ When sending document data to AIQ, each posted ticket is first placed into a que
 
 Each document in the queue includes a sync status value indicating its current state in the sync process:
 
-- **0** – Fully synced; nothing pending  
-- **1** – Recently added to the queue, willy sync on the next connector run  
-- **2** – Document is currently in the active sync queue  
-- **9** – Sync error; requires remediation before it can be re-synced
-
+| Code | Meaning |
+|------|---------|
+| 0 | Done/synced |
+| 1 | Pending |
+| 2 | In-flight ("active") |
+| **4** | **Preparing (queue-only, set while `USER_SP_AIQ_QUEUE_ONE_DOCUMENT` builds the payload before flipping to 1)** |
+| 5 | Permanently invalid — no usable email/phone (customer-only, added via `USER_SP_AIQ_MEMBER_VALIDATION` a few sessions back) |
+| **7** | **Rate-limited, retryable — new field added with V1.01.11 for customers, items, and queue events** |
+| 9 | Permanent error |
 ---
 
 ## SECTION 11: AIQ Items Quantity on Hand View
