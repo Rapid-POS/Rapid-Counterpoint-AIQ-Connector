@@ -1,6 +1,6 @@
-# RapidPOS AIQ Connector v1.01.20 Release Notes
+# RapidPOS AIQ Connector v1.01.20 Release Notes - Coming Soon
 
-**Release Date:** September 20, 2026
+**Release Date:** September 27, 2026
 
 _This release improves customer sync reliability, with fewer unnecessary retries, less database load, and fixes for several issues that could cause alerts or uploads to get stuck._
 
